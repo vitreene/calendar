@@ -4,42 +4,21 @@
 
 .App {
   text-align: center;
-  margin: 0 auto;
+  margin: 2rem auto 0;
+  width: 100%;
   font-family: "Lucida Grande", sans-serif;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
 
 .f-layout{
   display: flex;
+  width: 795px;
   height: 720px;
+  margin: 0 auto 10rem;
 }
 
 .f-layout__heures{
   width: 75px;
+  border-right: thin solid #A7A7A7;
 }
 
 .f-layout__conteneur{
@@ -49,34 +28,67 @@
   background-color: #ECECEC;
 }
 
+.f-layout__conteneur__inner{
+  position: relative;
+  min-width: 100%;
+  min-height: 100%;
+  /* background: red; */
+}
+
 
 .f-layout__horaires{
   display: flex;
   flex-flow: column;
   justify-content: space-between;
-  height: 100%;
+  height: calc(100% + 0.45rem);
   text-align: right;
   padding: 0;
-  margin-right: 10px;
+  margin: 0 10px 0 0;
+  margin-top: -0.25rem;
 }
 
 .f-layout__horaires li{
   list-style: none;
   font-weight: bold;
+  /* line-height: 30px; */
 }
 .f-heures-detail-half{
-  font-size: 0.7rem;
-  color: #D5D5D5;
+  font-size: 0.6rem;
+  font-weight: normal;
+  color: #A7A7A7;
 }
 .f-heures-detail span{
-  margin-left:0.5rem;
-  font-size: 0.7rem;
-  color: #D5D5D5;
+  margin-left:0.4rem;
+  font-size: 0.6rem;
+  font-weight: normal;
+  color: #A7A7A7;
 }
 .f-heures-detail{
   color: #686868;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
 }
 .f-heures-detail-half span{
   display: none;
+}
+
+.f-event-block{
+  position: absolute;
+  background-color: #fff;
+  border: thin solid #A7A7A7;
+  border-left: 4px #4b6eab solid;
+  text-align: left;
+  padding: 6px 10px;
+}
+
+.f-event-block__item{
+  margin: 0;
+  padding: 0;
+  font-size: 0.75rem;
+  color: #4b6eab;
+}
+.f-event-block__location{
+  margin: 0;
+  padding: 0;
+  font-size: 0.6rem;
+  color: #A7A7A7;
 }

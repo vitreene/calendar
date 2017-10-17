@@ -1,11 +1,12 @@
 import React from "react";
-import Layout from './layout';
+import Layout from './Layout/layout';
+import Events from './Events';
 
 
 export default function LayOutDay(props) {
     return(
         <Layout>
-        <h1> Sample Item 12:09</h1>
+        <Events dayEvents = {props.dayEvents} />
         </Layout>
     )
 }
