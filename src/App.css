@@ -1,0 +1,82 @@
+*{
+  box-sizing: border-box;
+}
+
+.App {
+  text-align: center;
+  margin: 0 auto;
+  font-family: "Lucida Grande", sans-serif;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.f-layout{
+  display: flex;
+  height: 720px;
+}
+
+.f-layout__heures{
+  width: 75px;
+}
+
+.f-layout__conteneur{
+  flex: 0 0 1;
+  width: 620px;
+  padding: 0 10px;
+  background-color: #ECECEC;
+}
+
+
+.f-layout__horaires{
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  height: 100%;
+  text-align: right;
+  padding: 0;
+  margin-right: 10px;
+}
+
+.f-layout__horaires li{
+  list-style: none;
+  font-weight: bold;
+}
+.f-heures-detail-half{
+  font-size: 0.7rem;
+  color: #D5D5D5;
+}
+.f-heures-detail span{
+  margin-left:0.5rem;
+  font-size: 0.7rem;
+  color: #D5D5D5;
+}
+.f-heures-detail{
+  color: #686868;
+  font-size: 0.85rem;
+}
+.f-heures-detail-half span{
+  display: none;
+}
