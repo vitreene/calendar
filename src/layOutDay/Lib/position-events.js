@@ -16,10 +16,10 @@ PositionEvents.propTypes = {
 }
 
 export function checkEventsPosition(dayEvents) {
-
+    // si l'on n'est pas assuré de l'ordre des éléments
     const events = dayEvents.sort( (a,b) => a.start > b.start );
-    const result = [{divide: false}];
 
+    const result = [{divide: false}];
     const res = events.map( (ev, index, arr) => {
         for (let i = index + 1; i < arr.length; i++) {
             // test de collision sur les extrémités
