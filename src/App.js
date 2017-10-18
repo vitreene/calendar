@@ -4,7 +4,7 @@ import LayOutDay from './layOutDay';
 import './App.css';
 
 const dayEvents = [ 
-  {start: 30, end: 150}, 
+  {start: 30, end: 150, item:'Salut', location: 'de Marseille'}, 
   {start: 540, end: 600}, 
   {start: 560, end: 620}, 
   {start: 610, end: 670} 

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function PositionEvents(Component) {
     return function (props) {
@@ -10,42 +11,41 @@ export default function PositionEvents(Component) {
     };
 }
 
-export function checkEventsPosition(dayEvents) {
-    const result = [];
-    
-    function evList( de, index = 0 ) {
-        if (!de.length) return;
-        const current = de[0];
-        const reste = de.slice(1);
-        
-        // faut-il décaler le composant ?
-        const shifted = !!index &&
-        result[index-1].divide &&
-        !result[index-1].shifted;
-        
-        // si juxtaposition, diviser la largeur
-        const divide = (reste.length)
-        ? hasCollision(current, reste)
-        : result[index-1].divide;
-        
-        result[index] = {
-            ...current,
-            divide,
-            shifted,
-        };
-        // récursion sur le restant
-        evList( reste, ++index );
-    }
-    
-    evList(dayEvents);
-    return result; 
+PositionEvents.propTypes = {
+    Component: PropTypes.element
 }
 
-// recherche une intersection entre l'obet courant et les suivants
+export function checkEventsPosition(dayEvents) {
+
+    const events = dayEvents.sort( (a,b) => a.start > b.start );
+    const result = [{divide: false}];
+
+    const res = events.map( (ev, index, arr) => {
+        for (let i = index + 1; i < arr.length; i++) {
+            // test de collision sur les extrémités
+            const collision = hasCollision(ev, arr[i]);
+
+            // reporter le résultat sur la cible
+            result[i] = {divide: collision};
+            // appliquer sur la source
+            result[index].divide = collision ? collision : result[index].divide;
+        }
+        // faut-il décaler le composant ?
+        // si l'element précedent est divisé et n'est pas décalé
+        result[index].shifted = !!index &&
+        result[index - 1].divide &&
+        !result[index - 1].shifted;
+
+        return {
+            ...ev,
+            ...result[index]
+        }
+    })   
+    return res;
+}
+
 export function hasCollision({start, end}, array) {
     return [start, end].reduce(
-        (p,c) => array.reduce(
-            (pp, cc) => pp || (c > cc.start && c < cc.end),
-            false ),
-        false);
+        (p, c) => (c >= array.start && c <= array.end),
+        false )
 }

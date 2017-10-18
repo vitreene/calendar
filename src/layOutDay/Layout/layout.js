@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Horaires from './horaires';
 
 export default function Layout(props) {
@@ -12,4 +14,8 @@ export default function Layout(props) {
             </main>
         </div>
     );
+}
+
+Layout.propTypes = {
+    children: PropTypes.element
 }

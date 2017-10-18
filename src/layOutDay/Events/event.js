@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // intervalle : 720px / 24 = 30px 
 
@@ -24,4 +25,8 @@ export default function Event({event}) {
         <p className="f-event-block__location">{location}</p>
          </article>
     );
+}
+
+Event.propTypes = {
+    event: PropTypes.object
 }

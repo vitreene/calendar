@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function Horaires(props) {
-    const {debut = 9, fin = 21, intervalle = 30 } = props;
+export default function Horaires({debut, fin, intervalle}) {
     const options = {
         hour: 'numeric', minute: 'numeric', 
         timeZone: 'Europe/London',
@@ -28,10 +28,22 @@ export default function Horaires(props) {
             );
         }
     }
-    
+
     return (
         <ul className= "f-layout__horaires">
             {horaires}
             </ul>
     );
+}
+
+Horaires.propTypes = {
+    debut: PropTypes.number,
+    fin: PropTypes.number,
+    intervalle: PropTypes.number 
+}
+
+Horaires.defaultProps = {
+    debut: 9,
+    fin: 21,
+    intervalle: 30 
 }
