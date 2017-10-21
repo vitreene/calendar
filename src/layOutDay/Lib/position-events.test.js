@@ -1,24 +1,28 @@
-import { checkEventsPosition, hasCollision } from "./position-events";
+import { checkEventsPosition, hasCollision } from "./position-events-lib";
 
 
 describe( 'collisions', () => {
     
-    const events = [
-        {start: 7, end: 12},
-        {start: 15, end: 20}
-    ]
+    const ev =[ {start: 7, end: 12}, {start: 5, end: 10}];
     
     it('has collision', () => {
-        const ev = {start: 5, end: 10};
-        const res = hasCollision(ev, events[0]);
-        // console.log('hasCollision', res);
+        const res = hasCollision(ev[0], ev[1]);
+         console.log('hasCollision', res);
         expect(res).toBeTruthy();
     })
     
+    
+    it('has collision', () => {
+        const res = hasCollision(ev[1], ev[0]);
+         console.log('hasCollision', res);
+        expect(res).toBeTruthy();
+    })
+    
+
     it('has no collision', () => {
-        const ev = {start: 1, end: 5};
-        const res = hasCollision(ev, events[1]);
-        // console.log('hasCollision', res);
+        const event = {start: 1, end: 5};
+        const res = hasCollision(event, ev[0]);
+         console.log('hasCollision', res);
         expect(res).toBeFalsy();
     })
 

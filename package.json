@@ -1,8 +1,8 @@
 {
   "name": "calendar",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "homepage": "https://github.com/vitreene/calendar",
+  "homepage": "http://vitreene.github.io/calendar",
   "devDependencies": {
     "react-scripts": "1.0.14"
   },

@@ -1,21 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+// position-events-lib
 
-export default function PositionEvents(Component) {
-    return function (props) {
-        const dayEvents = checkEventsPosition(props.dayEvents)
-        const newProps = {...props, dayEvents}
-        return (
-            <Component {...newProps} />
-        );
-    };
-}
-
-PositionEvents.propTypes = {
-    Component: PropTypes.element
-}
-
-export function checkEventsPosition(dayEvents) {
+export  function checkEventsPosition(dayEvents) {
     // si l'on n'est pas assuré de l'ordre des éléments
     const events = dayEvents.sort( (a,b) => a.start > b.start );
 
@@ -44,8 +29,21 @@ export function checkEventsPosition(dayEvents) {
     return res;
 }
 
+
+export function hasCollision(arr1, arr2) {
+    // placer l'event le plus tôt en premier
+    const [source, dest] = (arr1.start > arr2.start) 
+    ? [arr2, arr1] 
+    : [arr1, arr2];
+    const {start, end} = source;
+    return [start, end].reduce(
+        (p, c) => (c >= dest.start && c <= dest.end),
+        false )
+}
+/*
 export function hasCollision({start, end}, array) {
     return [start, end].reduce(
         (p, c) => (c >= array.start && c <= array.end),
         false )
 }
+*/
