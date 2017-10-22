@@ -1,49 +1,96 @@
-// position-events-lib
+import validate from './validate-events-lib'
+import quelMessage from './quel-message-lib'
+import {CONTENEUR_L, QTE__COL_MAX} from '../Config'
 
-export  function checkEventsPosition(dayEvents) {
-    // si l'on n'est pas assuré de l'ordre des éléments
-    const events = dayEvents.sort( (a,b) => a.start > b.start );
+export default function checkEventsPosition(dayEvents) {
+    const cleanEvents = validate(dayEvents);
+    if (cleanEvents.hasOwnProperty('reject')) return cleanEvents;
+    
+    const rangs = checkEventsRang(cleanEvents);
+    const groupEvents = positionEvents(rangs, cleanEvents);
+    return groupEvents;
+}
 
-    const result = [{divide: false}];
-    const res = events.map( (ev, index, arr) => {
-        for (let i = index + 1; i < arr.length; i++) {
-            // test de collision sur les extrémités
-            const collision = hasCollision(ev, arr[i]);
+function positionEvents(groupes, events) {
+    let curseur = 0;
+    let qteError= false;
 
-            // reporter le résultat sur la cible
-            result[i] = {divide: collision};
-            // appliquer sur la source
-            result[index].divide = collision ? collision : result[index].divide;
-        }
-        // faut-il décaler le composant ?
-        // si l'element précedent est divisé et n'est pas décalé
-        result[index].shifted = !!index &&
-        result[index - 1].divide &&
-        !result[index - 1].shifted;
+    const evts = groupes.map(rangs => {
+        // retirer les positions vides, 
+        const cleanRangs = rangs.filter(String);
+        // le rang le plus élevé donnera le nombre de colonnes
+        const cols = Math.max(...cleanRangs);
+        if (cols >= QTE__COL_MAX) qteError = true;
+        
+        // calculer les dimensions des events.
+        const l = CONTENEUR_L / (cols + 1);
+        const event = cleanRangs.map( (rang, index) => {
+            const ev = events[curseur + index];
+            const x = l * rang;
+            const y = ev.start;
+            const h = ev.end - y;
+            return { ...ev, x, y, l, h}
+        })
+        curseur = rangs.length;
+        return event;
+    })
+    if (qteError) return {
+        reject: true,
+        message: quelMessage('too much cols')
+    };
 
-        return {
-            ...ev,
-            ...result[index]
-        }
-    })   
-    return res;
+    return evts.reduce( (p, c) => [...p, ...c], [] );
 }
 
 
+export 
+function checkEventsRang(dayEvents) {
+    if (!dayEvents.length) return false;
+    // regrouper tous les events liés entre eux
+    // si un évenement n'est relié à aucun autre avant lui, créer un nouveau groupe
+    const groupEvents = [ [] ];
+    let currentGroup = 0;
+    // limiter les recherches de collision au groupe courant
+    let curseur = 0;
+
+    // grouper les events et leur attribuer un rang
+    // eslint-disable-next-line
+    dayEvents.map( (event, index, array) => {
+        // identifier les positions occupées
+        let occupe = [];
+        let noCollision = true;
+        // parcourir de l'élément vers le début du groupe;
+        for (let i = curseur; i < index ; i++) {
+            // test de collision
+            if ( hasCollision(array[i], event) ) {
+                noCollision = false;
+                occupe[ groupEvents[currentGroup][i] ] = false;
+            } else {
+                //ajouter le rang disponible
+                occupe[ groupEvents[currentGroup][i] ] = true;
+            }
+        }
+        if (noCollision && index) {
+            curseur = groupEvents[currentGroup].length;
+            currentGroup++;
+            groupEvents[currentGroup] = [];
+            occupe = [];
+        }
+        groupEvents[currentGroup][index] = quelRang(occupe);
+    })
+    return groupEvents;
+}
+
+// si un event débute avant la fin d'un autre
 export function hasCollision(arr1, arr2) {
-    // placer l'event le plus tôt en premier
-    const [source, dest] = (arr1.start > arr2.start) 
-    ? [arr2, arr1] 
-    : [arr1, arr2];
-    const {start, end} = source;
-    return [start, end].reduce(
-        (p, c) => (c >= dest.start && c <= dest.end),
-        false )
+    // const h = ((arr1.end - arr2.start) > HAUTEUR_MIN) ? 0 : HAUTEUR_MIN;
+    // return arr2.start < (arr1.end + h);
+    return arr2.start < (arr1.end );
 }
-/*
-export function hasCollision({start, end}, array) {
-    return [start, end].reduce(
-        (p, c) => (c >= array.start && c <= array.end),
-        false )
+
+// renvoie l'index de la première valeur true rencontrée
+export function quelRang(array) {
+    const res = array.findIndex( x => x );
+    return (res < 0) ? array.length : res;
 }
-*/
+

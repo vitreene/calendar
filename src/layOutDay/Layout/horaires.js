@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import {HEURE_MIN, HEURE_MAX, INTERVALLE} from '../Config'
+
 export default function Horaires({debut, fin, intervalle}) {
     const options = {
         hour: 'numeric', minute: 'numeric', 
@@ -43,7 +45,7 @@ Horaires.propTypes = {
 }
 
 Horaires.defaultProps = {
-    debut: 9,
-    fin: 21,
-    intervalle: 30 
+    debut: HEURE_MIN, 
+    fin: HEURE_MAX,
+    intervalle: INTERVALLE 
 }
