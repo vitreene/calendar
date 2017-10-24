@@ -11,13 +11,13 @@ export default function quelMessage(alert, event) {
         case 'high':
             return `Too much events today to display. You work too much.`;
             
-        case 'très tôt':
+        case 'très tot':
             return `office is closed now ! \n (${heure(event.start)} to ${heure(event.end)})`;
         
         case 'très tard':
             return `office is closed now ! \n (${heure(event.start)} to ${heure(event.end)})`;
 
-        case 'tôt':
+        case 'tot':
             return `this event starts at ${heure(event.start)}` ;
             
         case 'tard':

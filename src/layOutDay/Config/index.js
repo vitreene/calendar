@@ -18,3 +18,20 @@ export const SAMPLE = {
     item: 'Sample Item',
     location: 'Sample location'
 };
+
+// de coté pour le moment.
+export const STATUT = {
+    TOO_MUCH: 'too much cols',
+    LOW: 'low',
+    HIGH: 'high',
+    TRES_TOT: 'très tot',
+    TRES_TARD: 'très tard',
+    TOT: 'tot',
+    TARD: 'tard',
+    JOUR: 'jour',
+    BUREAU: 'bureau',
+    COURT: 'court',
+    REJECTED: 'rejected',
+    ACCEPTED: 'accepted',
+    DEFAUT: 'defaut'
+}

@@ -95,9 +95,9 @@
 }
 
 /* PAVE EVENT */
+.f-event-block-out,
 .f-event-block{
   position: absolute;
-  background-color: #fff;
   border: thin solid #A7A7A7;
   border-left: 4px #4b6eab solid;
   text-align: left;
@@ -105,9 +105,20 @@
   overflow: scroll;
 }
 
+.f-event-block{
+  background-color: #fff;
+}
+
 .f-event-block:hover{
   min-height: 50px!important;
   z-index: 1;
+}
+
+.f-event-block-out{
+  background-color: #A7A7A7;
+}
+.f-event-block-out:hover{
+  background-color: #fff;
 }
 
 .f-event-block__item{

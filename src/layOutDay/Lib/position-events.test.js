@@ -19,7 +19,7 @@ describe( 'collisions', () => {
     it('is inside', () => {
         const event = {start: 8, end: 10};
         const res = hasCollision(ev[1], event);
-         console.log('hasCollision', res);
+        //  console.log('hasCollision', res);
         expect(res).toBeTruthy();
     })
 })
@@ -64,7 +64,7 @@ describe( 'check Events Rang', () => {
         ]
         const rangs = [[0,1,2], [,,,0,1,1], [,,,,,,0] ]
         const res = checkEventsRang(events);
-        console.log('groupEvents', res.map( r=> r.length), res);
+        // console.log('groupEvents', res.map( r=> r.length), res);
         expect(res).toEqual(rangs);
     })
     

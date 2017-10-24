@@ -2,37 +2,45 @@ import React, { Component } from 'react';
 
 import LayOutDay from './layOutDay';
 import './App.css';
-/*
+
 const dayEvents = [ 
   {start: 30, end: 150}, 
   {start: 540, end: 600}, 
   {start: 560, end: 620}, 
   {start: 610, end: 670} 
 ];
+
+/*
+const dayEvents = [ 
+  {start: -100, end: -50}, 
+  {start: 0, end: 100}, 
+  {start: 30, end: 150}, 
+  {start: 540, end: 600}, 
+  {start: 560, end: 620}, 
+  {start: 610, end: 670}, 
+  {start: 610, end: 770}, 
+];
 */
-  const dayEvents = [ 
-    {start: -100, end: -50}, 
-    {start: 0, end: 100}, 
-    {start: 30, end: 150}, 
-    {start: 540, end: 600}, 
-    {start: 560, end: 620}, 
-    {start: 610, end: 670}, 
-    {start: 610, end: 770}, 
-  ];
 
 // const dayEvents = Array(2000);
 // const dayEvents = Array(24).fill({start: -30, end: 30});
 
 /*
 const dayEvents = [ 
+  {start: -60, end: -30}, //rejected
+  {start: -60, end: -30}, //rejected
+  {start: -60, end: -30}, //rejected
   {start: -30, end: 30}, 
   {start: 0, end: 60}, 
   {start: 30, end: 150}, 
   {start: 540, end: 600}, 
   {start: 560, end: 620}, 
-  {start: 610, end: 770} 
+  {start: 610, end: 770},
+  {start: 750, end: 770}, //rejected
+  {start: 750, end: 770}, //rejected
 ];
-
+*/
+/*
 const dayEvents = [ 
   {start: 30, end: 150}, 
   {start: 150, end: 200}, 
@@ -49,6 +57,8 @@ const dayEvents = [
   {start: 600, end: 700}, 
 ];
 */
+
+
 class App extends Component {
   render() {
     return (

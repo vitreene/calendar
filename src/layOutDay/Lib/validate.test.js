@@ -1,6 +1,6 @@
 import {HORAIRE_MIN, HORAIRE_MAX, HAUTEUR_MIN, QTE_MIN, QTE_MAX} from '../Config'
 
-import validateEvents, { acceptEvents, isOneOf } from "./validate-events-lib";
+import validateEvents, { limitEvents, isOneOf } from "./validate-events-lib";
 
 
 describe( 'isOneOf', () => {
@@ -8,7 +8,7 @@ describe( 'isOneOf', () => {
         const i = 'a';
         const arr  = [ 'a', 'b', 'c']
         const res = isOneOf(i, arr);
-        console.log('isOneOf', res);
+        // console.log('isOneOf', res);
         expect(res).toBeTruthy();
     })
 
@@ -16,27 +16,27 @@ describe( 'isOneOf', () => {
         const i = 'd';
         const arr  = [ 'a', 'b', 'c']
         const res = isOneOf(i, arr);
-        console.log('isOneOf', res);
+        // console.log('isOneOf', res);
         expect(res).toBeUndefined();
     })
 })
 
-describe( 'acceptEvents', () => {
+describe( 'limitEvents', () => {
     it('pas d’events', () => {
         const ev =[];
-        const res = acceptEvents(ev);
+        const res = limitEvents(ev);
         expect(res.reject).toBeTruthy();
     })
 
     it('trop d’events', () => {
         const ev = Array(2000).fill({start: 8, end: 10})
-        const res = acceptEvents(ev);
+        const res = limitEvents(ev);
         expect(res.reject).toBeTruthy();
     })
 
     it('assez d’events', () => {
         const ev = {start: 8, end: 10};
-        const res = acceptEvents(ev);
+        const res = limitEvents(ev);
         expect(res.reject).toBeFalsy();
     })
 })
@@ -58,16 +58,13 @@ describe( 'Validate events', () => {
     it('très tard', () => {
         const event = [ {start: HORAIRE_MAX + 5, end: HORAIRE_MAX + 10} ]
         const res = validateEvents(event);
-        expect(res[0].start).toEqual(HORAIRE_MAX - HAUTEUR_MIN);
-        expect(res[0].end).toEqual(HORAIRE_MAX);
+        expect(res[0].select).toBe('rejected');
     })
-    
-    
+        
     it('très tot', () => {
         const event = [ {start: HORAIRE_MIN -20, end: HORAIRE_MIN - 10} ]
         const res = validateEvents(event);
-        expect(res[0].start).toEqual(HORAIRE_MIN);
-        expect(res[0].end).toEqual(HAUTEUR_MIN);
+        expect(res[0].select).toBe('rejected');
     })
     
     it('toute la journée', () => {
