@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function Alert(props) {
-    return(
+    return (
         <section className="f-layout__conteneur__alert"> 
             <h3 className="f-conteneur__alert">{props.message}</h3>
             </section>

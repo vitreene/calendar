@@ -83,8 +83,6 @@ function checkEventsRang(dayEvents) {
 
 // si un event débute avant la fin d'un autre
 export function hasCollision(arr1, arr2) {
-    // const h = ((arr1.end - arr2.start) > HAUTEUR_MIN) ? 0 : HAUTEUR_MIN;
-    // return arr2.start < (arr1.end + h);
     return arr2.start < (arr1.end );
 }
 

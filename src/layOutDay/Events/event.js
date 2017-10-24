@@ -6,7 +6,6 @@ import {SAMPLE}  from '../Config'
 export default function Event({event}) {
     const tot = isOneOf(event.alert, ['tot', 'jour', 'très tot', 'très tard']);
     const tard = isOneOf(event.alert, ['tard', 'jour', 'très tot', 'très tard']);
-    // const tard = (event.alert === 'tard') || (event.alert === 'jour');
     const position = {
         top: event.y,
         left: event.x,

@@ -7,7 +7,6 @@ export default function EventOut({event}) {
     const top = isOneOf(event.alert, ['très tot']) ? HORAIRE_MIN - (HAUTEUR_MIN + 5) : HORAIRE_MAX + 5;
 
     const position = {
-        // top: event.y,
         top,
         left: event.x,
         height: HAUTEUR_MIN,

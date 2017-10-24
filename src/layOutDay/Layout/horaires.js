@@ -30,11 +30,10 @@ export default function Horaires({debut, fin, intervalle}) {
             );
         }
     }
-
     return (
         <ul className= "f-layout__horaires">
             {horaires}
-            </ul>
+        </ul>
     );
 }
 
